@@ -5,6 +5,8 @@
 
 using namespace std;
 
+void iniciarJogo(); 
+
 
 void menuInicial(){
      int opcao = 0;
@@ -44,22 +46,20 @@ void menuInicial(){
     }
 }
 
-void iniciarJogo(){
-    // criando um tabuleiro
+/*Função para iniciar tabuleiro*/
+void iniciandoTabuleiro(char tabuleiro[3][3]){
 
-    int linha;
-    int coluna;
-    char tabuleiro[3][3];
+    int linha, coluna;
 
-    tabuleiro[0][0] = '_';
-    tabuleiro[0][1] = '_';
-    tabuleiro[0][2] = '_';
-    tabuleiro[1][0] = '_';
-    tabuleiro[1][1] = '_';
-    tabuleiro[1][2] = '_';
-    tabuleiro[2][0] = '_';
-    tabuleiro[2][1] = '_';
-    tabuleiro[2][2] = '_';
+    for (linha = 0; linha < 3; linha++){
+        for (coluna = 0; coluna < 3; coluna++){
+            tabuleiro[linha][coluna] = '_';
+        }
+    }
+}
+
+void exibirTabuleiro(char tabuleiro[3][3]){
+    int linha, coluna;
 
     for (linha = 0; linha < 3; linha++){
         for (coluna = 0; coluna <3; coluna++){
@@ -68,6 +68,17 @@ void iniciarJogo(){
 
         cout << "\n";
     }
+}
+
+void iniciarJogo(){
+    // criando um tabuleiro
+
+    int linha;
+    int coluna;
+    char tabuleiro[3][3];
+
+    iniciandoTabuleiro(tabuleiro);
+    exibirTabuleiro(tabuleiro);
 
 
 
