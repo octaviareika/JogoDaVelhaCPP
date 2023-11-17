@@ -5,7 +5,10 @@
 
 using namespace std;
 
-void iniciarJogo(); 
+
+void limpaTela(){
+    system("CLS");
+}
 
 
 void menuInicial(){
@@ -76,9 +79,36 @@ void iniciarJogo(){
     int linha;
     int coluna;
     char tabuleiro[3][3];
+    int estadoDeJogo = 1;
+    int turnoDoJogador=1; // turno do jogador vai intercalar
 
-    iniciandoTabuleiro(tabuleiro);
-    exibirTabuleiro(tabuleiro);
+    int colunaJogada; 
+    int linhaJogada;
+    string nome;
+
+    while(estadoDeJogo == 1){
+
+        limpaTela();
+        iniciandoTabuleiro(tabuleiro);
+        exibirTabuleiro(tabuleiro);
+
+        cout << "Insira seu nome\n";
+        cin >> nome;
+        cout << nome << "," << "digite uma linha\n";
+        cin >> linhaJogada;
+        cout << "Digite uma coluna\n";
+        cin >> colunaJogada; 
+
+        if (turnoDoJogador == 1){
+            tabuleiro[linhaJogada][colunaJogada] = 'X';
+            turnoDoJogador++; // vai pro jogador 2
+        }
+
+        else {
+            tabuleiro[linhaJogada][colunaJogada] = 'O';
+            turnoDoJogador--; // vai pro jogador 1
+        }
+    }
 
 
 
