@@ -106,33 +106,71 @@ void iniciarJogo(){
         cin >> colunaJogada; 
         colunaJogada = colunaJogada - 1;
 
+        //// se algumas dessas opçoes ja tiverem sido ocupadas antes
         if (turnoDoJogador == 1){
-            tabuleiro[linhaJogada][colunaJogada] = 'X';
-            turnoDoJogador = 2; // vai pro jogador 2
+            if (tabuleiro[linhaJogada][colunaJogada] == 'X' || tabuleiro[linhaJogada][colunaJogada] == 'O'){ 
+                cout << "Jogada inválida\n";
+                continue;
+            }
+            else {
+                tabuleiro[linhaJogada][colunaJogada] = 'X';
+                turnoDoJogador++; // vai pro jogador 2
+            }
         }
 
         else {
-            tabuleiro[linhaJogada][colunaJogada] = 'O';
-            turnoDoJogador = 1; // vai pro jogador 1
+            if (tabuleiro[linhaJogada][colunaJogada] == 'X' || tabuleiro[linhaJogada][colunaJogada] == 'O'){ 
+                cout << "Jogada inválida\n";
+                continue;
+            }
+            else {
+                tabuleiro[linhaJogada][colunaJogada] = 'O';
+                turnoDoJogador--; // vai pro jogador 1
+            }
         }
 
-        // verificar se o jogador venceu 
+        // verificar se o jogador venceu começando pela linha
 
-        for (int linha = 0; linha < 3; linha++){
-            if (tabuleiro[linha][0] == 'X' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][0] ){
+        for (linha = 0; linha < 3; linha++){
+            if (tabuleiro[linha][0] == 'X' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][1] ){
                 cout << "O jogador 1 venceu!!\n ";
+                estadoDeJogo = 0;
             }
-            else if (tabuleiro[linha][0] == 'O' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][0] ){
+            else if (tabuleiro[linha][0] == 'O' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][1] ){
                 cout << "O jogador 2 venceu!!\n";
+                estadoDeJogo = 0;
             }
 
+        }
+
+        //verificar começando pela coluna
+        for (coluna = 0; coluna < 3; coluna++){
+            if (tabuleiro[0][coluna] == 'X' && tabuleiro[1][coluna] == tabuleiro[0][coluna] && tabuleiro[2][coluna] == tabuleiro[1][coluna]){
+                cout << "O jogador 1 venceu!!\n ";
+                estadoDeJogo = 0;
+            }
+            else if (tabuleiro[0][coluna] == 'O' && tabuleiro[1][coluna] == tabuleiro[0][coluna] && tabuleiro[2][coluna] == tabuleiro[1][coluna] ){
+                cout << "O jogador 2 venceu!!\n";
+                estadoDeJogo = 0;
+            }
         }
         
+        //verificar as diagonais
+        if (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == tabuleiro[0][0] && tabuleiro[2][2] == tabuleiro[1][1]){
+            cout << "O jogador 1 venceu!!\n ";
+            estadoDeJogo = 0;
+        }
+        else if (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == tabuleiro[0][0] && tabuleiro[2][2] == tabuleiro[1][1] ){
+            cout << "O jogador 2 venceu!!\n";
+            estadoDeJogo = 0;
 
-        rodada = rodada + 1;
+        }
+
+        rodada = rodada + 1;// incrementa a rodada
     }
-
-    cout << "Fim do jogo!";
+    cout << "\n";
+    exibirTabuleiro(tabuleiro);
+    cout << "Fim do jogo!\n";
 
 }
 
