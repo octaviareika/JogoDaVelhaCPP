@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 using namespace std;
 
 void iniciarJogo();
 
-void limpaTela(){
-    system("CLS");
-}
+
 
 
 void menuInicial(){
@@ -17,10 +17,11 @@ void menuInicial(){
 
 
     while (opcao < 1 || opcao > 3) {
-        cout << "Bem-vindo ao jogo\n";
-        cout << "1 - Jogar\n";
-        cout << "2 - Sobre\n";
-        cout << "3 - Sair\n";
+        cout << ANSI_COLOR_RED << "Bem-vindo ao jogo da velha!!\n";
+        cout << ANSI_COLOR_GREEN << "1 - Jogar\n";
+        cout << ANSI_COLOR_GREEN << "2 - Sobre\n";
+        cout << ANSI_COLOR_GREEN <<"3 - Sair\n";
+        cout << ANSI_COLOR_RESET << "Digite uma opção\n";
         cin >> opcao;
 
         switch (opcao)
@@ -33,18 +34,23 @@ void menuInicial(){
         
         case 2:
 
+            cout << "Sobre o jogo\n";
+            cout << "Jogo da velha é um jogo de tabuleiro em que dois jogadores jogam\n";
+            cout << "um contra o outro, sendo um jogador 'X' e o outro 'O'.\n";
+            cout << "O jogador que conseguir colocar três símbolos iguais em uma linha, coluna ou diagonal vence.\n";
+
             break;
         
 
         case 3:
 
-            cout << "Adeus\n";
+            cout << "Adeus \o/. Até a próxima vida!!\n";
 
             break;
         
 
         default:
-            cout << "Opção inválida\n";
+            cout << ANSI_COLOR_RED << "Opção inválida\n";
             break;
         }
     }
@@ -88,7 +94,7 @@ void iniciarJogo(){
     int colunaJogada; 
     int linhaJogada;
 
-    limpaTela();
+
     iniciandoTabuleiro(tabuleiro);
     while(rodada < 9 && situacaoAtual == 1){
 
@@ -133,11 +139,11 @@ void iniciarJogo(){
 
         for (linha = 0; linha < 3; linha++){
             if (tabuleiro[linha][0] == 'X' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][1] ){
-                cout << "O jogador 1 venceu!!\n ";
+                cout <<  ANSI_COLOR_GREEN  << "O jogador 1 venceu!!\n ";
                 situacaoAtual = 0;
             }
             else if (tabuleiro[linha][0] == 'O' && tabuleiro[linha][1] == tabuleiro[linha][0] && tabuleiro[linha][2] == tabuleiro[linha][1] ){
-                cout << "O jogador 2 venceu!!\n";
+                cout <<  ANSI_COLOR_GREEN  << "O jogador 2 venceu!!\n";
                 situacaoAtual = 0;
             }
 
@@ -146,31 +152,32 @@ void iniciarJogo(){
         //verificar começando pela coluna
         for (coluna = 0; coluna < 3; coluna++){
             if (tabuleiro[0][coluna] == 'X' && tabuleiro[1][coluna] == tabuleiro[0][coluna] && tabuleiro[2][coluna] == tabuleiro[1][coluna]){
-                cout << "O jogador 1 venceu!!\n ";
+                cout <<  ANSI_COLOR_GREEN  << "O jogador 1 venceu!!\n ";
                 situacaoAtual = 0;
             }
             else if (tabuleiro[0][coluna] == 'O' && tabuleiro[1][coluna] == tabuleiro[0][coluna] && tabuleiro[2][coluna] == tabuleiro[1][coluna] ){
-                cout << "O jogador 2 venceu!!\n";
+                cout <<  ANSI_COLOR_GREEN  << "O jogador 2 venceu!!\n";
                 situacaoAtual = 0;
             }
         }
         
         //verificar as diagonais
         if (tabuleiro[0][0] == 'X' && tabuleiro[1][1] == tabuleiro[0][0] && tabuleiro[2][2] == tabuleiro[1][1]){
-            cout << "O jogador 1 venceu!!\n ";
+            cout <<  ANSI_COLOR_GREEN  << "O jogador 1 venceu!!\n ";
             situacaoAtual = 0;
         }
         else if (tabuleiro[0][0] == 'O' && tabuleiro[1][1] == tabuleiro[0][0] && tabuleiro[2][2] == tabuleiro[1][1] ){
-            cout << "O jogador 2 venceu!!\n";
+            cout <<  ANSI_COLOR_GREEN << "O jogador 2 venceu!!\n";
             situacaoAtual = 0;
 
         }
 
         rodada = rodada + 1;// incrementa a rodada
     }
-    cout << "\n";
+
     exibirTabuleiro(tabuleiro);
     cout << "Fim do jogo!\n";
+    menuInicial();
 
 }
 
