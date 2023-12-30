@@ -5,6 +5,9 @@
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
+#include <limits>
+
+
 using namespace std;
 
 void iniciarJogo();
@@ -23,6 +26,12 @@ void menuInicial(){
         cout << ANSI_COLOR_GREEN <<"3 - Sair\n";
         cout << ANSI_COLOR_RESET << "Digite uma opção\n";
         cin >> opcao;
+
+        if(cin.fail()) {
+            cin.clear(); // limpa o estado de erro
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignora a entrada inválida
+            opcao = 0; // atribui 0 para que o loop continue
+        }
 
         switch (opcao)
         {
